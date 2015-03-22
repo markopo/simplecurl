@@ -8,8 +8,9 @@
 
 require 'SimpleCurl.php';
 
+
 $url = "https://api.github.com/users/markopo";
 $sc = new SimpleCurl($url);
 $data = $sc->Fetch();
 
-print_r($data); 
+print_r($data);

@@ -6,18 +6,27 @@
  * Time: 09:57
  */
 
+/**
+ * Class SimpleCurl
+ */
 class SimpleCurl {
 
-    private $url;
+    protected $url;
 
     private $curl;
 
+    /**
+     * @param $url
+     */
     public function __construct($url){
 
         $this->url = $url;
 
     }
 
+    /**
+     * @return mixed|null
+     */
     public function Fetch() {
         $data = null;
         $this->curl = curl_init($this->url);
@@ -30,11 +39,19 @@ class SimpleCurl {
         if($info['http_code'] == 200) {
             $data = $response;
         }
-        else {
-            echo "Curl error: " . curl_error($this->curl);
-        }
         curl_close($this->curl);
 
         return $data;
+    }
+
+    /**
+     * @param $data
+     */
+    public function Post($data){
+        $this->curl = curl_init($this->url);
+        curl_setopt($this->curl, CURLOPT_POST, true);
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($this->curl);
     }
 }
