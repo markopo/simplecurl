@@ -14,9 +14,9 @@ $sc = new SimpleCurl($url);
 
 $dataStr = http_build_query(array("name"=>"marko","age"=>38));
 
-$ok = $sc->Post($dataStr);
+$sc->Post($dataStr);
 
-echo $ok;
+
 
 
 
