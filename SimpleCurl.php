@@ -27,12 +27,19 @@ class SimpleCurl {
     /**
      * @return mixed|null
      */
-    public function Fetch() {
+    public function Fetch($headers = []) {
         $data = null;
         $this->curl = curl_init($this->url);
 
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, array("User-Agent: php-curl"));
+
+        if(count($headers) > 0) {
+            foreach ($headers as $header) {
+                curl_setopt($this->curl, CURLOPT_HTTPHEADER, [$header]);
+            }
+        }
+
         $response = curl_exec($this->curl);
         $info = curl_getinfo($this->curl);
 
